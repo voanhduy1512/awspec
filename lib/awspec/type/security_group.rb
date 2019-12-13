@@ -36,7 +36,7 @@ module Awspec::Type
       permissions.each do |permission|
         permission.ip_ranges.select { |ip_range| cidrs.push(ip_range.cidr_ip) }
       end
-      cidrs == Array(cidr)
+      cidrs.sort == Array(cidr).sort
     end
 
     def outbound_opened?(port = nil, protocol = nil, cidr = nil)
@@ -53,7 +53,7 @@ module Awspec::Type
       permissions.each do |permission|
         permission.ip_ranges.select { |ip_range| cidrs.push(ip_range.cidr_ip) }
       end
-      cidrs == Array(cidr)
+      cidrs.sort == Array(cidr).sort
     end
 
     def inbound
