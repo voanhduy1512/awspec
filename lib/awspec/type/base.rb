@@ -52,8 +52,6 @@ module Awspec::Type
       end
     end
 
-    undef :timeout
-
     private
 
     def check_existence
