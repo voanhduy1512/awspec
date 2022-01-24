@@ -24,6 +24,11 @@ module Awspec::Type
       end
     end
 
+    def has_location?(location)
+      check_existence
+      find_bucket_location(id) == location
+    end
+
     def acl_owner
       check_existence
       @acl = find_bucket_acl(id)
@@ -103,8 +108,8 @@ module Awspec::Type
           if value.is_a?(Array)
             return false if r[key].map(&:to_h) != value
           end
-          true
         end
+        true
       end
     end
 

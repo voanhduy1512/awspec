@@ -68,6 +68,22 @@ describe s3_bucket('my-bucket') do
 end
 
 describe s3_bucket('my-bucket') do
+  context 'with bucket location is not blank' do
+    it { should have_location('ap-northeast-1') }
+  end
+
+  context 'with bucket location is blank' do
+    before do
+      Aws.config[:s3][:stub_responses][:get_bucket_location][:location_constraint] = ''
+    end
+
+    it 'should location be us-east-1' do
+      should have_location('us-east-1')
+    end
+  end
+end
+
+describe s3_bucket('my-bucket') do
   it do
     should have_lifecycle_rule(
       id: 'MyRuleName',
